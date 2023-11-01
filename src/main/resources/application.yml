@@ -1,6 +1,18 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.50.221:3306
-    username: "zhangac"
+    #url: jdbc:mysql://192.168.50.221:3306
+    #username: "zhangac"
+    #password: "123456"
+    url: jdbc:mysql://localhost:3306/bookshop
+    username: "bookshop"
     password: "123456"
+
+server:
+  servlet:
+    context-path: /shop
+
+mybatis:
+  configuration:
+    #下划线转驼峰
+    map-underscore-to-camel-case: true

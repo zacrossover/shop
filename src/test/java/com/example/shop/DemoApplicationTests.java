@@ -1,18 +1,19 @@
 package com.example.shop;
 
-import com.example.shop.dao.UsersDao;
-import com.example.shop.entity.Users;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.shop.dao.UserDao;
+import com.example.shop.entity.User;
+
 @SpringBootTest
 class DemoApplicationTests {
     @Autowired
-    private UsersDao usersDao;
+    private UserDao userDao;
     @Test
     void contextLoads() {
-        Users user = usersDao.getById("3");
+        User user = userDao.getById(3);
         System.out.println(user);
     }
 
