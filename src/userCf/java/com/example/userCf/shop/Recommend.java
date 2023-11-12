@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static java.lang.Math.min;
+
 /**
  * @author wz
  */
@@ -45,7 +47,7 @@ public class Recommend {
      * @return
      */
     private double pearson_dis(List<Book> rating1, List<Book> rating2) {
-        int n=rating1.size();
+        int n=min(rating1.size(),rating2.size());
         List<Integer> rating1ScoreCollect = rating1.stream().map(A -> A.score).collect(Collectors.toList());
         List<Integer> rating2ScoreCollect = rating2.stream().map(A -> A.score).collect(Collectors.toList());
 
@@ -61,20 +63,8 @@ public class Recommend {
     }
 
 
-    public List<Book> recommend(String username, List<User> users) {
-        //找到最近邻
-        Map<Double, String> distances = computeNearestNeighbor(username, users);
-        String nearest = distances.values().iterator().next();
-        System.out.println("最近邻 -> " + nearest);
+    public List<Book> recommend(String username, List<User> users , int number) {
 
-        //找到最近邻看过，但是我们没看过的电影，计算推荐
-        User neighborRatings = new User();
-        for (User user:users) {
-            if (nearest.equals(user.username)) {
-                neighborRatings = user;
-            }
-        }
-        System.out.println("最近邻看过的电影 -> " + neighborRatings.bookList);
 
         User userRatings = new User();
         for (User user:users) {
@@ -84,12 +74,44 @@ public class Recommend {
         }
         System.out.println("用户看过的电影 -> " + userRatings.bookList);
 
-        //根据自己和邻居的电影计算推荐的电影
         List<Book> recommendationBooks = new ArrayList<>();
-        for (Book book : neighborRatings.bookList) {
-            if (userRatings.find(book.bookName) == null) {
-                recommendationBooks.add(book);
+        //找到最近邻
+        Map<Double, String> distances = computeNearestNeighbor(username, users);
+        //判断用户是否为因用户
+        if(userRatings.bookList.isEmpty())
+        {
+            recommendationBooks =  HotItemRecommendation.recommendHotItems(username,number);
+        }else
+        {
+            for (String value : distances.values()) {
+                System.out.println("最近邻 -> " + value);
+
+                //找到最近邻看过，但是我们没看过的电影，计算推荐
+                User neighborRatings = new User();
+                for (User user : users) {
+                    if (value.equals(user.username)) {
+                        neighborRatings = user;
+                    }
+                }
+                System.out.println("最近邻看过的电影 -> " + neighborRatings.bookList);
+                //根据自己和邻居的电影计算推荐的电影
+                for (Book book : neighborRatings.bookList) {
+                    if (userRatings.find(book.bookName) == null) {
+                        recommendationBooks.add(book);
+                        if(recommendationBooks.size()>=number)
+                        {
+                            Collections.sort(recommendationBooks);
+                            return recommendationBooks;
+                        }
+                    }
+                }
+
             }
+            if(recommendationBooks.size()<number)
+            {
+                recommendationBooks.addAll( HotItemRecommendation.recommendHotItems(username,number-recommendationBooks.size()));
+            }
+
         }
         Collections.sort(recommendationBooks);
         return recommendationBooks;

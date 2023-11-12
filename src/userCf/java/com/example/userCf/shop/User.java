@@ -3,6 +3,7 @@ package shop;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * @author wz
  */
@@ -18,6 +19,7 @@ public class User {
 
     public User set(String bookName, int score) {
         this.bookList.add(new Book(bookName, score));
+        BookRatings.addRating(bookName, score);
         return this;
     }
 

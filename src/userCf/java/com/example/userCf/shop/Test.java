@@ -15,77 +15,42 @@ public class Test {
         //输入用户总量
         List<User> users = new ArrayList<>();
         users.add(new User("小明")
-                .set("中国合伙人", 50)
-                .set("太平轮", 30)
-                .set("荒野猎人", 45)
-                .set("老炮儿", 50)
-                .set("我的少女时代", 30)
-                .set("肖洛特烦恼", 45)
-                .set("火星救援", 50));
+                .set("挪威的森林", 50)
+                .set("基督山伯爵", 30)
+                .set("教父", 45)
+                .set("破碎的四月", 50)
+                .set("尘埃落定", 30)
+                .set("活着", 45)
+                .set("拿破仑全传", 50));
 
         users.add(new User("小红")
-                .set("小时代4", 40)
-                .set("荒野猎人", 30)
-                .set("我的少女时代", 50)
-                .set("肖洛特烦恼", 50)
+                .set("呼啸山庄", 40)
+                .set("尘埃落定", 30)
+                .set("活着", 50)
+                .set("牛虻", 50)
                 .set("火星救援", 30)
-                .set("后会无期", 30));
+                .set("拿破仑全传", 30));
 
         users.add(new User("小阳")
-                .set("小时代4", 20)
-                .set("中国合伙人", 50)
-                .set("我的少女时代", 30)
-                .set("老炮儿", 50)
+                .set("毛概", 20)
+                .set("美的历程", 50)
+                .set("平凡的世界", 50)
                 .set("肖洛特烦恼", 45)
-                .set("速度与激情7", 50));
+                .set("小鹿斑比", 50));
 
         users.add(new User("小四")
-                .set("小时代4", 50)
-                .set("中国合伙人", 30)
+                .set("毛概", 50)
                 .set("我的少女时代", 40)
                 .set("匆匆那年", 40)
-                .set("速度与激情7", 35)
                 .set("火星救援", 35)
-                .set("后会无期", 45));
-
-        users.add(new User("六爷")
-                .set("小时代4", 20)
-                .set("中国合伙人", 40)
-                .set("荒野猎人", 45)
-                .set("老炮儿", 50)
-                .set("我的少女时代", 20));
-
-        users.add(new User("小李")
-                .set("荒野猎人", 50)
-                .set("盗梦空间", 50)
-                .set("我的少女时代", 30)
-                .set("速度与激情7", 50)
-                .set("蚁人", 45)
-                .set("老炮儿", 40)
-                .set("后会无期", 35));
-
-        users.add(new User("隔壁老王")
-                .set("荒野猎人", 50)
-                .set("中国合伙人", 40)
-                .set("我的少女时代", 10)
-                .set("Phoenix", 50)
-                .set("甄嬛传", 40)
-                .set("The Strokes", 50));
-
-        users.add(new User("邻村小芳")
-                .set("小时代4", 40)
-                .set("我的少女时代", 45)
-                .set("匆匆那年", 45)
-                .set("甄嬛传", 25)
-                .set("The Strokes", 30));
-
+                .set("许三观卖血记", 45));
 
         Recommend recommend = new Recommend();
-        List<Book> recommendationBooks = recommend.recommend("小明", users);
+        List<Book> recommendationBooks = recommend.recommend("小四", users,10 );
         System.out.println("-----------------------");
         System.out.println("推荐结果如下：");
         for (Book book : recommendationBooks) {
-            System.out.println("电影："+book.bookName+" ,评分："+book.score);
+            System.out.println("图书："+book.bookName+" ,评分："+book.score);
         }
     }
 }
