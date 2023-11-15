@@ -1,5 +1,6 @@
 package com.example.shop;
 
+import com.example.shop.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,10 +12,11 @@ import com.example.shop.entity.User;
 class DemoApplicationTests {
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private UserService userService;
     @Test
     void contextLoads() {
-        User user = userDao.getById(3);
-        System.out.println(user);
+        int role = userService.checkUser("zhanga","123456");
+        System.out.println(role);
     }
-
 }

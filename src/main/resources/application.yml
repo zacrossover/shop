@@ -4,8 +4,8 @@ spring:
     #url: jdbc:mysql://192.168.50.221:3306
     #username: "zhangac"
     #password: "123456"
-    url: jdbc:mysql://localhost:3306/bookshop
-    username: "bookshop"
+    url: jdbc:mysql://123.57.13.132:3306
+    username: "shop"
     password: "123456"
 
 server:
