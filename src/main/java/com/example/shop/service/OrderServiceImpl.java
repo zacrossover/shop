@@ -21,11 +21,11 @@ public class OrderServiceImpl implements OrderService {
 		order.setOrderNo(UUID.randomUUID().toString().replace("-", ""));
 		order.setUserId(userId);
 		order.setBookId(book.getId());
-		order.setBookName(book.getBookName());
+/*		order.setBookName(book.getBookName());
 		order.setClassification(book.getClassification());
 		order.setPrice(book.getPrice());
 		order.setDescription(book.getDescription());
-		order.setPictures(book.getPictures());
+		order.setPictures(book.getPictures());*/
 		order.setStatus(2);
 		return orderDao.add(order);
 	}

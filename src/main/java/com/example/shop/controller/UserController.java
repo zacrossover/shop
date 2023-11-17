@@ -17,9 +17,9 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/authentication")
-    public Result checkUser(String username,String password) {
+    public Result logIn(String username,String password) {
 
-        return new Result(1, "查询成功", userService.checkUser(username,password));
+        return new Result(1, "查询成功", userService.logIn(username,password));
     }
 
 }

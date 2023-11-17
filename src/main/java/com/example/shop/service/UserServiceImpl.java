@@ -10,11 +10,14 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
-    public int checkUser(String username,String password){
+    public int logIn(String username,String password){
         User user = userDao.getUserByName(username,password);
         int roleId = 0;
-        if(user!=null)
+        int userId = 0;
+        if(user!=null) {
             roleId = user.getRole();
+            userId = user.getId();
+        }
         return roleId;
     }
 }
