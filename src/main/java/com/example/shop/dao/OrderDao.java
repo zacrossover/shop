@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.example.shop.entity.Order;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface OrderDao {
@@ -33,4 +34,9 @@ public interface OrderDao {
     @Select("SELECT * FROM t_order WHERE id = #{id}")
     Order getById(int id);
 
+	@Update("update shop.t_order set score= #{score}, score1= #{score1},score2= #{score2},score3= #{score3},score4= #{score4} where order_no = #{orderNo}")
+	void saveScore(Order order);
+
+	@Select("SELECT * FROM t_order WHERE user_id = #{bookId}")
+	List<Order> listByBookId(int bookId);
 }

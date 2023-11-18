@@ -27,4 +27,9 @@ public interface OrderService {
 	 */
     Order getById(int id);
 
+
+	void saveScore(int score1,int score2,int score3,int score4,int orderId);
+
+	float getAverageScore(int bookId);
+
 }

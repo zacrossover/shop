@@ -10,14 +10,18 @@ public class Order {
     private String orderNo;
     private int userId;
     private int bookId;
-    private String bookName;
-    private String classification;
-    private BigDecimal price;
-    private int quantity;
-    private String description;
-    private String pictures;
+//    private String bookName;
+//    private String classification;
+//    private BigDecimal price;
+//    private int quantity;
+//    private String description;
+//    private String pictures;
     private int status;
-    private int score;
+    private float score;
     private int avgScore;
     private Timestamp createTime;
+    private int score1;
+    private int score2;
+    private int score3;
+    private int score4;
 }

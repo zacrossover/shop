@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/authentication")
+    @GetMapping("/logIn")
     public Result logIn(String username,String password) {
 
         return new Result(1, "查询成功", userService.logIn(username,password));

@@ -6,11 +6,14 @@ import com.example.shop.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
-    public int logIn(String username,String password){
+    public Map<String,String> logIn(String username,String password){
         User user = userDao.getUserByName(username,password);
         int roleId = 0;
         int userId = 0;
@@ -18,6 +21,11 @@ public class UserServiceImpl implements UserService {
             roleId = user.getRole();
             userId = user.getId();
         }
-        return roleId;
+
+        Map<String,String> result = new HashMap<String,String>();
+        result.put("userId",String.valueOf(userId));
+        result.put("roleId",String.valueOf(roleId));
+
+        return result;
     }
 }

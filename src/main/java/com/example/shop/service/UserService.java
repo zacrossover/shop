@@ -1,5 +1,7 @@
 package com.example.shop.service;
 
+import java.util.Map;
+
 public interface UserService {
-     public int logIn(String username,String password);
+     public Map<String,String> logIn(String username, String password);
 }
