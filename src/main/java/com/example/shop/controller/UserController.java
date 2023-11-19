@@ -19,7 +19,7 @@ public class UserController {
     @GetMapping("/logIn")
     public Result logIn(String username,String password) {
 
-        return new Result(1, "查询成功", userService.logIn(username,password));
+        return new Result(1, "调用成功", userService.logIn(username,password));
     }
 
 }

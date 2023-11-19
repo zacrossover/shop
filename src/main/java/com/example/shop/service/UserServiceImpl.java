@@ -17,12 +17,14 @@ public class UserServiceImpl implements UserService {
         User user = userDao.getUserByName(username,password);
         int roleId = 0;
         int userId = 0;
+        String resultname = null;
+        Map<String,String> result = new HashMap<String,String>();
         if(user!=null) {
             roleId = user.getRole();
             userId = user.getId();
+            resultname = username;
         }
-
-        Map<String,String> result = new HashMap<String,String>();
+        result.put("username",resultname);
         result.put("userId",String.valueOf(userId));
         result.put("roleId",String.valueOf(roleId));
 
