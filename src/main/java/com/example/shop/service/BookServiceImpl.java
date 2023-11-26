@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.shop.dao.BookDao;
 import com.example.shop.entity.Book;
+import com.github.pagehelper.PageHelper;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -25,7 +26,8 @@ public class BookServiceImpl implements BookService {
 	}
 	
 	@Override
-    public List<Book> list() {
+    public List<Book> list(int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
 		List<Book> books = bookDao.list();
 		fillPicture(books);
     	return books;

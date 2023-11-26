@@ -38,8 +38,8 @@ public class BookController {
 	 * @return
 	 */
     @GetMapping("/list")
-    public Result list() {
-        return new Result(1, "查询成功", bookService.list());
+    public Result list(int pageNum, int pageSize) {
+        return new Result(1, "查询成功", bookService.list(pageNum, pageSize));
     }
     
 	/**

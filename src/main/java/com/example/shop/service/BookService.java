@@ -9,7 +9,7 @@ public interface BookService {
 	 * 查询上架图书
 	 * @return
 	 */
-    List<Book> list();
+    List<Book> list(int pageNum, int pageSize);
     
     /**
      * 按名称查询图书

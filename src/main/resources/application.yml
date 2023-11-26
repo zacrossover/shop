@@ -16,3 +16,8 @@ mybatis:
   configuration:
     #下划线转驼峰
     map-underscore-to-camel-case: true
+
+pagehelper:
+  propertyName: propertyValue
+  reasonable: true
+  defaultCount: true # 分页插件默认参数支持 default-count 形式，自定义扩展的参数，必须大小写一致
