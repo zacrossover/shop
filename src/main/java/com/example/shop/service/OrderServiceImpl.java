@@ -18,10 +18,10 @@ public class OrderServiceImpl implements OrderService {
 	private OrderDao orderDao;
 
 	@Override
-	public int add(int userId, Book book) {
+	public int add(String username, Book book) {
 		Order order = new Order();
 		order.setOrderNo(UUID.randomUUID().toString().replace("-", ""));
-		order.setUserId(userId);
+		order.setUsername(username);
 		order.setBookId(book.getId());
 		order.setBookName(book.getBookName());
 		order.setClassification(book.getClassification());
@@ -33,8 +33,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Order> listByUserId(int userId) {
-		return orderDao.listByUserId(userId);
+	public List<Order> listByUsername(String username) {
+		return orderDao.listByUsername(username);
 	}
 
 	@Override

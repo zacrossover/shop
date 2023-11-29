@@ -8,7 +8,7 @@ import lombok.Data;
 public class Order {
     private int id;
     private String orderNo;
-    private int userId;
+    private String username;
     private int bookId;
     private String bookName;
     private String classification;
