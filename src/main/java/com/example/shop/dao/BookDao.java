@@ -31,16 +31,26 @@ public interface BookDao {
      * @param bookName
      * @return
      */
-    @Select("SELECT * FROM t_book WHERE book_name LIKE CONCAT('%', #{bookName}, '%') AND status = 1")
-    List<Book> listByName(String bookName);
+    @Select("<script>"
+    		+ "SELECT * FROM t_book WHERE book_name LIKE CONCAT('%', #{bookName}, '%') "
+    		+ "<if test='status != null and status != -1'>"
+    		+ "AND status = #{status}"
+    		+ "</if>"
+    		+ "</script>")
+    List<Book> listByName(String bookName, Integer status);
     
     /**
      * 按分类查询图书
      * @param classification
      * @return
      */
-    @Select("SELECT * FROM t_book WHERE classification = #{classification} AND status = 1")
-    List<Book> listByClassification(String classification);
+    @Select("<script>"
+    		+ "SELECT * FROM t_book WHERE classification = #{classification} "
+    		+ "<if test='status != null and status != -1'>"
+    		+ "AND status = #{status}"
+    		+ "</if>"
+    		+ "</script>")
+    List<Book> listByClassification(String classification, Integer status);
     
     /**
      * 按id查询图书

@@ -16,14 +16,14 @@ public interface BookService {
      * @param bookName
      * @return
      */
-    List<Book> listByName(String bookName);
+    List<Book> listByName(String bookName, Integer status);
     
     /**
      * 按分类查询图书
      * @param classification
      * @return
      */
-    List<Book> listByClassification(String classification);
+    List<Book> listByClassification(String classification, Integer status);
     
     /**
      * 按id查询图书

@@ -34,15 +34,15 @@ public class BookServiceImpl implements BookService {
     }
 	
 	@Override
-	public List<Book> listByName(String bookName) {
-		List<Book> books = bookDao.listByName(bookName);
+	public List<Book> listByName(String bookName, Integer status) {
+		List<Book> books = bookDao.listByName(bookName, status);
 		fillPicture(books);
 		return books;
 	}
 	
 	@Override
-	public List<Book> listByClassification(String classification) {
-		List<Book> books = bookDao.listByClassification(classification);
+	public List<Book> listByClassification(String classification, Integer status) {
+		List<Book> books = bookDao.listByClassification(classification, status);
 		fillPicture(books);
 		return books;
 	}

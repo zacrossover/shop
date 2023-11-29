@@ -48,8 +48,8 @@ public class BookController {
      * @return
      */
     @GetMapping("/listByName")
-	public Result listByName(@NotBlank String bookName) {
-		return new Result(1, "查询成功", bookService.listByName(bookName));
+	public Result listByName(@NotBlank String bookName, Integer status) {
+		return new Result(1, "查询成功", bookService.listByName(bookName, status));
 	}
     
 	/**
@@ -58,8 +58,8 @@ public class BookController {
      * @return
      */
     @GetMapping("/listByClassification")
-    public Result listByClassification(@NotBlank String classification) {
-		return new Result(1, "查询成功", bookService.listByClassification(classification));
+    public Result listByClassification(@NotBlank String classification, Integer status) {
+		return new Result(1, "查询成功", bookService.listByClassification(classification, status));
 	}
 
 	/**
