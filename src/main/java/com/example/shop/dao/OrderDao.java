@@ -25,7 +25,14 @@ public interface OrderDao {
 	 */
 	@Select("SELECT * FROM t_order WHERE user_id = #{userId}")
 	List<Order> listByUserId(int userId);
-	
+
+
+	/**
+	 * 按username查询订单
+	 * @return
+	 */
+	@Select("SELECT * FROM t_order WHERE username = #{username}")
+	List<Order> listByUsername(String username);
 	/**
 	 * 按id查询订单
 	 * @param id

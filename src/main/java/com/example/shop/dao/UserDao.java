@@ -12,4 +12,7 @@ public interface UserDao {
 
     @Select("select * from shop.t_user where username = #{username} and password = #{password}")
     User getUserByName(String username,String password);
+
+    @Select("SELECT * FROM shop.t_user WHERE username = #{username}")
+    int getIdByUsername(String username);
 }

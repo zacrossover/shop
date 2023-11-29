@@ -22,6 +22,8 @@ public class RecommandServiceImpl implements RecommandService{
     private BookDao bookDao;
     @Autowired
     private OrderDao orderDao;
+    @Autowired
+    private UserService userService;
     public void fillPicture(List<Book> books) {
         StringBuilder sb;
         for(Book b : books) {
@@ -37,7 +39,8 @@ public class RecommandServiceImpl implements RecommandService{
         List<Order> orders = orderDao.list();
         for(Order o :orders)
         {
-            int userId = o.getUserId();
+            String username = o.getUsername();
+            int userId = userService.getIdByUsername(username);
             int bookId = o.getBookId();
             int score = o.getAvgScore();
             users.add(new UserCfUser(Integer.toString(userId))

@@ -30,4 +30,8 @@ public class UserServiceImpl implements UserService {
 
         return result;
     }
+
+    public int getIdByUsername(String username){
+        return userDao.getIdByUsername(username);
+    }
 }
