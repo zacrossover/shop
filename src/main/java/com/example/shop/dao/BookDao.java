@@ -16,8 +16,15 @@ public interface BookDao {
 	 * 查询上架图书
 	 * @return
 	 */
-    @Select("SELECT * FROM t_book WHERE status = 1")
-    List<Book> list();
+    @Select("<script>"
+    		+ "SELECT * FROM t_book "
+    		+ "<where>"
+    		+ "<if test='status != null and status != -1'>"
+    		+ " AND status = #{status}"
+    		+ "</if>"
+    		+ "</where>"
+    		+ "</script>")
+    List<Book> list(Integer status);
     
     /**
      * 按名称模糊查询图书

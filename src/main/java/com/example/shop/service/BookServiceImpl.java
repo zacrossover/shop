@@ -26,9 +26,9 @@ public class BookServiceImpl implements BookService {
 	}
 	
 	@Override
-    public List<Book> list(int pageNum, int pageSize) {
+    public List<Book> list(int pageNum, int pageSize, Integer status) {
 		PageHelper.startPage(pageNum, pageSize);
-		List<Book> books = bookDao.list();
+		List<Book> books = bookDao.list(status);
 		fillPicture(books);
     	return books;
     }
