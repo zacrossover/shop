@@ -22,9 +22,9 @@ public class OrderController {
 	 * 查询用户订单
 	 * @return
 	 */
-    @GetMapping("/listByUserId")
-    public Result listByUserId(int userId) {
-        return new Result(1, "查询成功", orderService.listByUserId(userId));
+    @GetMapping("/listByUsername")
+    public Result listByUserId(String username) {
+        return new Result(1, "查询成功", orderService.listByUsername(username));
     }
 
 	/**

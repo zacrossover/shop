@@ -173,9 +173,9 @@ public class BookController {
      * @return
      */
     @PostMapping("/buy")
-	public Result buy(int bookId, int userId) {
+	public Result buy(int bookId, String username) {
     	Book book = bookService.getById(bookId);
-		orderService.add(userId, book);
+		orderService.add(username, book);
 		return new Result(1, "购买成功");
 	}
 

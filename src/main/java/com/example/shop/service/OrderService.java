@@ -12,13 +12,13 @@ public interface OrderService {
 	 * @param book
 	 * @return
 	 */
-	int add(int userId, Book book);
+	int add(String username, Book book);
 	
 	/**
-	 * 按userId查询订单
+	 * 按username查询订单
 	 * @return
 	 */
-	List<Order> listByUserId(int userId);
+	List<Order> listByUsername(String username);
 	
 	/**
 	 * 按id查询订单
