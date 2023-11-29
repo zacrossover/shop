@@ -39,4 +39,7 @@ public interface OrderDao {
 
 	@Select("SELECT * FROM t_order WHERE user_id = #{bookId}")
 	List<Order> listByBookId(int bookId);
+
+	@Select("SELECT * FROM t_order")
+	List<Order> list();
 }
