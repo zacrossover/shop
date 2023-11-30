@@ -168,7 +168,7 @@ public class BookController {
 	/**
      * 购买图书
      * @param bookId
-     * @param userId
+     * @param username
      * @return
      */
     @PostMapping("/buy")

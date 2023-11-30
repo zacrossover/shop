@@ -16,23 +16,16 @@ public interface OrderDao {
 	 * @param order
 	 * @return
 	 */
-	@Insert("INSERT INTO t_order(order_no, user_id, book_id, book_name, classification, price, quantity, description, pictures, status, create_time) VALUES(#{orderNo}, #{userId}, #{bookId}, #{bookName}, #{classification}, #{price}, #{quantity}, #{description}, #{pictures}, #{status}, CURRENT_TIMESTAMP())")
+	@Insert("INSERT INTO t_order(order_no, username, book_id, book_name, classification, price, quantity, description, pictures, status, create_time) VALUES(#{orderNo}, #{username}, #{bookId}, #{bookName}, #{classification}, #{price}, #{quantity}, #{description}, #{pictures}, #{status}, CURRENT_TIMESTAMP())")
 	int add(Order order);
 	
-	/**
-	 * 按userId查询订单
-	 * @return
-	 */
-	@Select("SELECT * FROM t_order WHERE user_id = #{userId}")
-	List<Order> listByUserId(int userId);
-
-
 	/**
 	 * 按username查询订单
 	 * @return
 	 */
 	@Select("SELECT * FROM t_order WHERE username = #{username}")
 	List<Order> listByUsername(String username);
+	
 	/**
 	 * 按id查询订单
 	 * @param id
@@ -44,7 +37,7 @@ public interface OrderDao {
 	@Update("update shop.t_order set score= #{score}, score1= #{score1},score2= #{score2},score3= #{score3},score4= #{score4} where order_no = #{orderNo}")
 	void saveScore(Order order);
 
-	@Select("SELECT * FROM t_order WHERE user_id = #{bookId}")
+	@Select("SELECT * FROM t_order WHERE book_id = #{bookId}")
 	List<Order> listByBookId(int bookId);
 
 	@Select("SELECT * FROM t_order")

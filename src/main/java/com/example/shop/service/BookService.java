@@ -6,7 +6,7 @@ import com.example.shop.entity.Book;
 
 public interface BookService {
 	/**
-	 * 查询上架图书
+	 * 查询图书
 	 * @return
 	 */
     List<Book> list(int pageNum, int pageSize, Integer status);

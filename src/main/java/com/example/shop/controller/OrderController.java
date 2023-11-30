@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,9 +39,8 @@ public class OrderController {
 	}
 
 
-	@GetMapping("/scoring")
+	@PostMapping("/scoring")
 	public Result scoring(int score1,int score2,int score3,int score4,int orderId){
-
 		orderService.saveScore(score1,score2,score3,score4,orderId);
 		return new Result(1, "调用成功");
 	}

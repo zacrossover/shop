@@ -23,6 +23,7 @@ public interface BookDao {
     		+ " AND status = #{status}"
     		+ "</if>"
     		+ "</where>"
+    		+ " ORDER BY id DESC"
     		+ "</script>")
     List<Book> list(Integer status);
     
