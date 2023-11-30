@@ -111,23 +111,22 @@ public class BookController {
      */
     @PostMapping("/update")
 	public Result update(@Validated Book book, MultipartFile file) {
-    	if(file == null) {
-    		return new Result(0, "图片不能为空");
+    	if(file != null) {
+    		//上传图片至'resources\{图书分类}\'目录下
+    		//Book b = bookService.getById(book.getId());
+    		String path = ImagePathUtil.getImagePath() + book.getClassification() + System.getProperty("file.separator");
+    		File dir = new File(path);
+    		if(!dir.exists()) {
+    			dir.mkdir();
+    		}
+    		try {
+    			file.transferTo(new File(path + file.getOriginalFilename()));
+    		} catch (IllegalStateException | IOException e) {
+    			logger.error("修改图书失败", e);
+    			return new Result(0, "修改失败");
+    		}
+    		book.setPictures(file.getOriginalFilename());
     	}
-    	//上传图片至'resources\{图书分类}\'目录下
-    	//Book b = bookService.getById(book.getId());
-		String path = ImagePathUtil.getImagePath() + book.getClassification() + System.getProperty("file.separator");
-		File dir = new File(path);
-		if(!dir.exists()) {
-			dir.mkdir();
-		}
-		try {
-			file.transferTo(new File(path + file.getOriginalFilename()));
-		} catch (IllegalStateException | IOException e) {
-			logger.error("修改图书失败", e);
-			return new Result(0, "修改失败");
-		}
-		book.setPictures(file.getOriginalFilename());
 		bookService.update(book);
 		/*
 		 * 删除后影响历史订单图片的展示
