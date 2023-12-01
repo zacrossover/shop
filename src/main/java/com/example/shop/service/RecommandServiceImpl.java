@@ -1,7 +1,6 @@
 package com.example.shop.service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import com.example.shop.userCf.BookRatings;
 import com.example.shop.userCf.Recommend;
@@ -17,7 +16,69 @@ import com.example.shop.entity.Order;
 import com.github.pagehelper.PageHelper;
 @Service
 public class RecommandServiceImpl implements RecommandService{
-    private static List<UserCfUser> users = new ArrayList<>();
+
+
+    private static Map<String,UserCfUser> users = new Map<String, UserCfUser>() {
+        @Override
+        public int size() {
+            return 0;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return false;
+        }
+
+        @Override
+        public boolean containsKey(Object key) {
+            return false;
+        }
+
+        @Override
+        public boolean containsValue(Object value) {
+            return false;
+        }
+
+        @Override
+        public UserCfUser get(Object key) {
+            return null;
+        }
+
+        @Override
+        public UserCfUser put(String key, UserCfUser value) {
+            return null;
+        }
+
+        @Override
+        public UserCfUser remove(Object key) {
+            return null;
+        }
+
+        @Override
+        public void putAll(Map<? extends String, ? extends UserCfUser> m) {
+
+        }
+
+        @Override
+        public void clear() {
+
+        }
+
+        @Override
+        public Set<String> keySet() {
+            return null;
+        }
+
+        @Override
+        public Collection<UserCfUser> values() {
+            return null;
+        }
+
+        @Override
+        public Set<Entry<String, UserCfUser>> entrySet() {
+            return null;
+        }
+    };
     @Autowired
     private BookDao bookDao;
     @Autowired
@@ -43,11 +104,23 @@ public class RecommandServiceImpl implements RecommandService{
             int userId = userService.getIdByUsername(username);
             int bookId = o.getBookId();
             int score = o.getAvgScore();
-            users.add(new UserCfUser(Integer.toString(userId))
-                    .set(Integer.toString(bookId), score));
+            if(users.containsKey(Integer.toString(userId)))
+            {
+                users.get(Integer.toString(userId)).set(Integer.toString(bookId), score);
+            }else {
+
+                users.put(Integer.toString(userId),new UserCfUser(Integer.toString(userId))
+                        .set(Integer.toString(bookId), score));
+            }
+        }
+        List<UserCfUser> userList = new ArrayList<>();
+
+        for (Map.Entry<String, UserCfUser> entry : users.entrySet()) {
+            userList.add(entry.getValue());
+
         }
         Recommend recommend = new Recommend();
-        List<UserCfBook> recommendationBooks = recommend.recommend(Integer.toString(myUserId), users,nums );
+        List<UserCfBook> recommendationBooks = recommend.recommend(Integer.toString(myUserId), userList,nums );
         List<Book> books = new ArrayList<>();
         for(UserCfBook userCfBook :recommendationBooks)
         {
