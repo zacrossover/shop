@@ -37,7 +37,7 @@ public class RecommandController {
      * @return
      */
     @GetMapping("/recommandBooks")
-    public Result recommandBooks(int myUserId,int nums) {
+    public Result recommandBooks(String myUserId,int nums) {
         return new Result(1, "查询成功", recommandService.recommandBooks(myUserId, nums));
         /*test
         BookRatings.addRating("2", 20);

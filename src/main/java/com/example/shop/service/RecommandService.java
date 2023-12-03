@@ -8,5 +8,5 @@ public interface RecommandService {
      * 查询前nums个推荐图书
      * @return
      */
-    Object recommandBooks(int myUserId, int nums);
+    Object recommandBooks(String myUserId, int nums);
 }

@@ -96,20 +96,19 @@ public class RecommandServiceImpl implements RecommandService{
         }
     }
     @Override
-    public Object recommandBooks(int myUserId, int nums) {
+    public Object recommandBooks(String myUserId, int nums) {
         List<Order> orders = orderDao.list();
         for(Order o :orders)
         {
             String username = o.getUsername();
-            int userId = userService.getIdByUsername(username);
             int bookId = o.getBookId();
             int score = o.getAvgScore();
-            if(users.containsKey(Integer.toString(userId)))
+            if(users.containsKey(username))
             {
-                users.get(Integer.toString(userId)).set(Integer.toString(bookId), score);
+                users.get(username).set(Integer.toString(bookId), score);
             }else {
 
-                users.put(Integer.toString(userId),new UserCfUser(Integer.toString(userId))
+                users.put(username,new UserCfUser(username)
                         .set(Integer.toString(bookId), score));
             }
         }
@@ -120,7 +119,7 @@ public class RecommandServiceImpl implements RecommandService{
 
         }
         Recommend recommend = new Recommend();
-        List<UserCfBook> recommendationBooks = recommend.recommend(Integer.toString(myUserId), userList,nums );
+        List<UserCfBook> recommendationBooks = recommend.recommend(myUserId, userList,nums );
         List<Book> books = new ArrayList<>();
         for(UserCfBook userCfBook :recommendationBooks)
         {
