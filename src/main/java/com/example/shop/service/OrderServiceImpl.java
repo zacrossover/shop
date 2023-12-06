@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 import java.math.BigDecimal;
 
+import com.example.shop.dao.BookDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,8 @@ import com.example.shop.entity.Order;
 public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderDao orderDao;
-
+	@Autowired
+	private BookDao bookDao;
 	@Override
 	public int add(String username, Book book) {
 		Order order = new Order();
@@ -56,11 +58,13 @@ public class OrderServiceImpl implements OrderService {
 		float score = s1.add(s2).add(s3).add(s4).divide(BigDecimal.valueOf(4)).floatValue();
 		//System.out.println(score);
 		order.setScore(score);
-
+		int bookId = order.getBookId();
+		Book book = bookDao.getById(bookId);
+		book.setAvg_Score(getAverageScore(bookId,score));
 		orderDao.saveScore(order);
 	}
 
-	public float getAverageScore(int bookId){
+	public float getAverageScore(int bookId,float score){
 		List<Order> orderlist = orderDao.listByBookId(bookId);
 		float result = 0;
 		if(orderlist!=null&&orderlist.size()>0) {
@@ -70,6 +74,7 @@ public class OrderServiceImpl implements OrderService {
 				Order tempOrder = (Order) it.next();
 				sum.add(new BigDecimal(tempOrder.getScore()));
 			}
+			sum.add(new BigDecimal(score));
 			result = sum.divide(new BigDecimal(orderlist.size())).floatValue();
 		}
 		return result;

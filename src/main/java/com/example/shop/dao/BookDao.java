@@ -66,7 +66,7 @@ public interface BookDao {
      * @param book
      * @return
      */
-    @Insert("INSERT INTO t_book (book_no, book_name, classification, price, quantity, description, pictures, status) VALUES(#{bookNo}, #{bookName}, #{classification}, #{price}, #{quantity}, #{description}, #{pictures}, #{status})")
+    @Insert("INSERT INTO t_book (book_no, book_name, classification, price, quantity, description, pictures, status, avg_score) VALUES(#{bookNo}, #{bookName}, #{classification}, #{price}, #{quantity}, #{description}, #{pictures}, #{status},'3.0')")
     int add(Book book);
     
     /**

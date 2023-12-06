@@ -30,6 +30,6 @@ public interface OrderService {
 
 	void saveScore(int score1,int score2,int score3,int score4,int orderId);
 
-	float getAverageScore(int bookId);
+	float getAverageScore(int bookId,float score);
 
 }
