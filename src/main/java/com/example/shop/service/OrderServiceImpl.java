@@ -60,23 +60,34 @@ public class OrderServiceImpl implements OrderService {
 		order.setScore(score);
 		int bookId = order.getBookId();
 		Book book = bookDao.getById(bookId);
-		book.setAvg_Score(getAverageScore(bookId,score));
+		//book.setAvg_Score(getAverageScore(bookId,score));
 		orderDao.saveScore(order);
+		bookDao.updateAvgScore(bookId,getAverageScore(bookId,score));
 	}
 
 	public float getAverageScore(int bookId,float score){
 		List<Order> orderlist = orderDao.listByBookId(bookId);
 		float result = 0;
+		int num = 1;
+		BigDecimal s = new BigDecimal(score);
+
 		if(orderlist!=null&&orderlist.size()>0) {
-			BigDecimal sum = new BigDecimal(0);
 			Iterator it = orderlist.iterator();
 			while (it.hasNext()) {
 				Order tempOrder = (Order) it.next();
-				sum.add(new BigDecimal(tempOrder.getScore()));
+				if(tempOrder.getScore()!=0) {
+					s=s.add(new BigDecimal(tempOrder.getScore()));
+					num++;
+				}
 			}
-			sum.add(new BigDecimal(score));
-			result = sum.divide(new BigDecimal(orderlist.size())).floatValue();
 		}
+		System.out.println(s.toString());
+		s.add(new BigDecimal(score));
+		System.out.println(s);
+		result = s.divide(new BigDecimal(num),1,BigDecimal.ROUND_HALF_UP).floatValue();
+//		System.out.println(score);
+//		System.out.println(num);
+//		System.out.println(result);
 		return result;
 	}
 }

@@ -94,4 +94,12 @@ public interface BookDao {
     @Delete("DELETE FROM t_book WHERE id = #{id}")
     int delete(int id);
 
+    /**
+     * 删除图书
+     * @param id
+     * @return
+     */
+    @Update("UPDATE t_book SET avg_score = #{score} WHERE id = #{id}")
+    int updateAvgScore(int id,float score);
+
 }
