@@ -21,7 +21,7 @@ public class UserCfBook implements Comparable<UserCfBook> {
 
     @Override
     public int compareTo(UserCfBook o) {
-        return score > o.score ? -1 : 1;
+        return score >= o.score ? -1 : 1;
     }
 
 }

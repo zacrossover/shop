@@ -72,7 +72,7 @@ public class RecommandServiceImpl implements RecommandService{
             List<Book> allBooks =bookDao.list(1);
             for(Book b:allBooks)
             {
-                BookRatings.addRating(Integer.toString(b.getId()), (int) Math.round(b.getAvg_Score()));
+                BookRatings.addRating(Integer.toString(b.getId()), (int) Math.round(b.getAvgScore()));
             }
         }
         Recommend recommend = new Recommend();

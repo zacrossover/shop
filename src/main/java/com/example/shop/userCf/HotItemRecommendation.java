@@ -15,7 +15,7 @@ public class HotItemRecommendation {
             String bookName = entry.getKey();
             Map<String, Integer> ratings = entry.getValue();
             int averageRating = ratings.getOrDefault("averageRating", 0);
-            System.out.println("图书：" + bookName + "，平均评分：" + averageRating);
+            //System.out.println("图书：" + bookName + "，平均评分：" + averageRating);
             boolean ok = false;
             for (UserCfBook book:popularItems) {
                 if (book.bookName.equals(bookName)) {
@@ -25,7 +25,9 @@ public class HotItemRecommendation {
             }
             if(!ok)
             {
-                popularItems.add(new UserCfBook(bookName,averageRating));
+                if(averageRating>0) {
+                    popularItems.add(new UserCfBook(bookName, averageRating));
+                }
             }
         }
         Collections.sort(popularItems);

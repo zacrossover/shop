@@ -102,7 +102,7 @@ public class BookController {
 			logger.error("添加图书失败", e);
 			return new Result(0, "添加失败");
 		}
-		BookRatings.addRating(Integer.toString(book.getId()), (int) Math.round(book.getAvg_Score()));
+		BookRatings.addRating(Integer.toString(book.getId()), (int) Math.round(book.getAvgScore()));
 		return new Result(1, "添加成功");
 	}
 
