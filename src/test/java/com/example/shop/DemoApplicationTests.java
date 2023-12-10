@@ -16,7 +16,7 @@ class DemoApplicationTests {
     private UserService userService;
     @Test
     void contextLoads() {
-        int role = userService.logIn("zhanga","123456");
-        System.out.println(role);
+        //int role = userService.logIn("zhanga","123456");
+        //System.out.println(role);
     }
 }

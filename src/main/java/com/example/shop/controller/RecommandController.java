@@ -33,17 +33,18 @@ public class RecommandController {
     private RecommandService recommandService;
 
     /**
-     * 查询前nums个推荐图书
+     * 查询前nums个推荐图书String myUserId,int nums
      * @return
      */
     @GetMapping("/recommandBooks")
-    public Result recommandBooks(String myUserId,int nums) {
-        return new Result(1, "查询成功", recommandService.recommandBooks(myUserId, nums));
+    public Result recommandBooks() {
+        //return new Result(1, "查询成功", recommandService.recommandBooks(myUserId, nums));
         /*test
         BookRatings.addRating("2", 20);
         BookRatings.addRating("3", 30);
         BookRatings.addRating("4", 50);
         return new Result(1, "查询成功", recommandService.recommandBooks(1, 10));
         */
+        return new Result(1, "查询成功", recommandService.recommandBooks("zhangjing", 10));
     }
 }

@@ -18,67 +18,12 @@ import com.github.pagehelper.PageHelper;
 public class RecommandServiceImpl implements RecommandService{
 
 
-    private static Map<String,UserCfUser> users = new Map<String, UserCfUser>() {
-        @Override
-        public int size() {
-            return 0;
-        }
+    private static Map<String,UserCfUser> users = new HashMap<String, UserCfUser>();
 
-        @Override
-        public boolean isEmpty() {
-            return false;
-        }
 
-        @Override
-        public boolean containsKey(Object key) {
-            return false;
-        }
 
-        @Override
-        public boolean containsValue(Object value) {
-            return false;
-        }
 
-        @Override
-        public UserCfUser get(Object key) {
-            return null;
-        }
 
-        @Override
-        public UserCfUser put(String key, UserCfUser value) {
-            return null;
-        }
-
-        @Override
-        public UserCfUser remove(Object key) {
-            return null;
-        }
-
-        @Override
-        public void putAll(Map<? extends String, ? extends UserCfUser> m) {
-
-        }
-
-        @Override
-        public void clear() {
-
-        }
-
-        @Override
-        public Set<String> keySet() {
-            return null;
-        }
-
-        @Override
-        public Collection<UserCfUser> values() {
-            return null;
-        }
-
-        @Override
-        public Set<Entry<String, UserCfUser>> entrySet() {
-            return null;
-        }
-    };
     @Autowired
     private BookDao bookDao;
     @Autowired
@@ -88,6 +33,10 @@ public class RecommandServiceImpl implements RecommandService{
     public void fillPicture(List<Book> books) {
         StringBuilder sb;
         for(Book b : books) {
+            if(b==null)
+            {
+                continue;
+            }
             sb = new StringBuilder();
             for(String p : b.getPictures().split(",")) {
                 sb.append("/image/").append(b.getClassification()).append("/").append(p).append(",");
@@ -114,10 +63,16 @@ public class RecommandServiceImpl implements RecommandService{
         }
         List<UserCfUser> userList = new ArrayList<>();
 
+
         for (Map.Entry<String, UserCfUser> entry : users.entrySet()) {
             userList.add(entry.getValue());
-
         }
+        List<Book> allBooks =bookDao.list(1);
+        for(Book b:allBooks)
+        {
+            //BookRatings.addRating(b.getId(), b.get);
+        }
+
         Recommend recommend = new Recommend();
         List<UserCfBook> recommendationBooks = recommend.recommend(myUserId, userList,nums );
         List<Book> books = new ArrayList<>();
@@ -127,6 +82,7 @@ public class RecommandServiceImpl implements RecommandService{
             books.add(book);
         }
         fillPicture(books);
+
         return books;
     }
 }

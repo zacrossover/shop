@@ -8,7 +8,7 @@ import com.example.shop.entity.Order;
 public interface OrderService {
 	/**
 	 * 新增订单
-	 * @param userId
+	 * @param username
 	 * @param book
 	 * @return
 	 */
