@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 import java.math.BigDecimal;
 
+import com.example.shop.dao.BookDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,8 @@ import com.example.shop.entity.Order;
 public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderDao orderDao;
-
+	@Autowired
+	private BookDao bookDao;
 	@Override
 	public int add(String username, Book book) {
 		Order order = new Order();
@@ -56,22 +58,36 @@ public class OrderServiceImpl implements OrderService {
 		float score = s1.add(s2).add(s3).add(s4).divide(BigDecimal.valueOf(4)).floatValue();
 		//System.out.println(score);
 		order.setScore(score);
-
+		int bookId = order.getBookId();
+		Book book = bookDao.getById(bookId);
+		//book.setAvg_Score(getAverageScore(bookId,score));
 		orderDao.saveScore(order);
+		bookDao.updateAvgScore(bookId,getAverageScore(bookId,score));
 	}
 
-	public float getAverageScore(int bookId){
+	public float getAverageScore(int bookId,float score){
 		List<Order> orderlist = orderDao.listByBookId(bookId);
 		float result = 0;
+		int num = 1;
+		BigDecimal s = new BigDecimal(score);
+
 		if(orderlist!=null&&orderlist.size()>0) {
-			BigDecimal sum = new BigDecimal(0);
 			Iterator it = orderlist.iterator();
 			while (it.hasNext()) {
 				Order tempOrder = (Order) it.next();
-				sum.add(new BigDecimal(tempOrder.getScore()));
+				if(tempOrder.getScore()!=0) {
+					s=s.add(new BigDecimal(tempOrder.getScore()));
+					num++;
+				}
 			}
-			result = sum.divide(new BigDecimal(orderlist.size())).floatValue();
 		}
+		System.out.println(s.toString());
+		s.add(new BigDecimal(score));
+		System.out.println(s);
+		result = s.divide(new BigDecimal(num),1,BigDecimal.ROUND_HALF_UP).floatValue();
+//		System.out.println(score);
+//		System.out.println(num);
+//		System.out.println(result);
 		return result;
 	}
 }

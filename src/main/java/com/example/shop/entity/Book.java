@@ -21,4 +21,5 @@ public class Book {
     private String description;
     private String pictures;
     private int status;
+    private float avg_Score;
 }

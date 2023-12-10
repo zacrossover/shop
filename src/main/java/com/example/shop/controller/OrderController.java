@@ -39,14 +39,16 @@ public class OrderController {
 	}
 
 
-	@PostMapping("/scoring")
+	@GetMapping("/scoring")
 	public Result scoring(int score1,int score2,int score3,int score4,int orderId){
 		orderService.saveScore(score1,score2,score3,score4,orderId);
 		return new Result(1, "调用成功");
 	}
+/*
 	@GetMapping("/getAve")
 	public Result getAverageScore(int bookId){
 		return new Result(1, "查询成功",orderService.getAverageScore(bookId));
 	}
+*/
 
 }

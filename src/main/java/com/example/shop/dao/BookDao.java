@@ -66,7 +66,7 @@ public interface BookDao {
      * @param book
      * @return
      */
-    @Insert("INSERT INTO t_book (book_no, book_name, classification, price, quantity, description, pictures, status) VALUES(#{bookNo}, #{bookName}, #{classification}, #{price}, #{quantity}, #{description}, #{pictures}, #{status})")
+    @Insert("INSERT INTO t_book (book_no, book_name, classification, price, quantity, description, pictures, status, avg_score) VALUES(#{bookNo}, #{bookName}, #{classification}, #{price}, #{quantity}, #{description}, #{pictures}, #{status},'3.0')")
     int add(Book book);
     
     /**
@@ -93,5 +93,13 @@ public interface BookDao {
      */
     @Delete("DELETE FROM t_book WHERE id = #{id}")
     int delete(int id);
+
+    /**
+     * 删除图书
+     * @param id
+     * @return
+     */
+    @Update("UPDATE t_book SET avg_score = #{score} WHERE id = #{id}")
+    int updateAvgScore(int id,float score);
 
 }
