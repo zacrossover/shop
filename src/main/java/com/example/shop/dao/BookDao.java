@@ -99,7 +99,7 @@ public interface BookDao {
      * @param id
      * @return
      */
-    @Update("UPDATE t_book SET avg_score = #{score} WHERE id = #{id}")
+    @Update("UPDATE t_book SET avgscore = #{score} WHERE id = #{id}")
     int updateAvgScore(int id,float score);
 
 }

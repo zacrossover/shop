@@ -56,6 +56,7 @@ public class BookServiceImpl implements BookService {
 			sb.append("/image/").append(b.getClassification()).append("/").append(p).append(",");
 		}
 		b.setPictures(sb.substring(0, sb.length() - 1));
+		System.out.println(b.getAvgScore());
 		return b;
 	}
 
