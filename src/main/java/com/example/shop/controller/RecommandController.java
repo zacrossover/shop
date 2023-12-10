@@ -45,5 +45,6 @@ public class RecommandController {
         BookRatings.addRating("4", 50);
         return new Result(1, "查询成功", recommandService.recommandBooks(1, 10));
         */
+        //return new Result(1, "查询成功", recommandService.recommandBooks("zhangjing", 10));
     }
 }

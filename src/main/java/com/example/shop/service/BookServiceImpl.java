@@ -2,6 +2,7 @@ package com.example.shop.service;
 
 import java.util.List;
 
+import com.example.shop.userCf.BookRatings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

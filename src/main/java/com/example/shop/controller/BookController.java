@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import com.example.shop.userCf.BookRatings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,6 +102,7 @@ public class BookController {
 			logger.error("添加图书失败", e);
 			return new Result(0, "添加失败");
 		}
+		BookRatings.addRating(Integer.toString(book.getId()), (int) Math.round(book.getAvg_Score()));
 		return new Result(1, "添加成功");
 	}
 
@@ -162,6 +164,7 @@ public class BookController {
 		 * System.getProperty("file.separator") + p); f.delete();//删除旧图片 }
 		 */
 		bookService.delete(id);
+		BookRatings.deleteRating(Integer.toString(id));
 		return new Result(1, "操作成功");
 	}
     

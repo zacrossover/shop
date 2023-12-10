@@ -22,6 +22,12 @@ public class BookRatings {
         }
     }
 
+    public static void clearRating() {
+        bookRatings.clear();
+    }
+    public static void deleteRating(String bookName) {
+        bookRatings.remove(bookName);
+    }
     public static void calculateAverageRatings() {
         for (Map.Entry<String, Map<String, Integer>> entry : bookRatings.entrySet()) {
             String bookName = entry.getKey();

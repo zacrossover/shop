@@ -19,7 +19,7 @@ public class UserCfUser {
 
     public UserCfUser set(String bookName, int score) {
         this.bookList.add(new UserCfBook(bookName, score));
-        BookRatings.addRating(bookName, score);
+
         return this;
     }
 
