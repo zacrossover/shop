@@ -67,12 +67,14 @@ public class RecommandServiceImpl implements RecommandService{
         for (Map.Entry<String, UserCfUser> entry : users.entrySet()) {
             userList.add(entry.getValue());
         }
-        List<Book> allBooks =bookDao.list(1);
-        for(Book b:allBooks)
+        if(BookRatings.getBookRatings().isEmpty())
         {
-            //BookRatings.addRating(b.getId(), b.get);
+            List<Book> allBooks =bookDao.list(1);
+            for(Book b:allBooks)
+            {
+                BookRatings.addRating(Integer.toString(b.getId()), (int) Math.round(b.getAvg_Score()));
+            }
         }
-
         Recommend recommend = new Recommend();
         List<UserCfBook> recommendationBooks = recommend.recommend(myUserId, userList,nums );
         List<Book> books = new ArrayList<>();
