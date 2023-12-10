@@ -21,7 +21,14 @@ public class UserCfBook implements Comparable<UserCfBook> {
 
     @Override
     public int compareTo(UserCfBook o) {
-        return score >= o.score ? -1 : 1;
+        // 根据评分进行比较
+        if (this.score < o.score) {
+            return -1;
+        } else if (this.score > o.score) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
 }
