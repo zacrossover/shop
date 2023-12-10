@@ -18,14 +18,16 @@ public class UserCfUser {
     }
 
     public UserCfUser set(String bookName, int score) {
-        this.bookList.add(new UserCfBook(bookName, score));
-
+        if(find(bookName)==null)
+        {
+            this.bookList.add(new UserCfBook(bookName, score));
+        }
         return this;
     }
 
     public UserCfBook find(String bookName) {
         for (UserCfBook book : bookList) {
-            if (book.bookName.equals(username)) {
+            if (book.bookName.equals(bookName)) {
                 return book;
             }
         }

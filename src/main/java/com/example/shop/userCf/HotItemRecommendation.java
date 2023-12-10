@@ -6,7 +6,7 @@ public class HotItemRecommendation {
     // 定义热门物品列表
     private static List<UserCfBook> popularItems = new ArrayList<>();
 
-    public static List<UserCfBook> recommendHotItems(String userId,int number) {
+    public static List<UserCfBook> recommendHotItems(List<UserCfBook> recommendationBooks,String userId,int number) {
         //计算每本书的平均评分。
         BookRatings.calculateAverageRatings();
         Map<String, Map<String, Integer>> bookRatingsMap = BookRatings.getBookRatings();
@@ -31,8 +31,29 @@ public class HotItemRecommendation {
             }
         }
         Collections.sort(popularItems);
+
+        List<UserCfBook> books= new ArrayList<>();
+        int index = 0;
+        while(number>0)
+        {
+            boolean ok = false;
+            for(UserCfBook b:recommendationBooks)
+            {
+                if (b.bookName.equals(popularItems.get(index).bookName))
+                {
+                    ok = true;
+                    break;
+                }
+            }
+            if(ok == false)
+            {
+                books.add(popularItems.get(index));
+                number-=1;
+            }
+            index +=1;
+        }
         // 给新用户推荐热门物品
-        return popularItems.subList(0, Math.min(number, popularItems.size())); // 推荐前5个热门物品
+        return books; // 推荐前5个热门物品
     }
 
 }

@@ -77,10 +77,10 @@ public class Recommend {
         List<UserCfBook> recommendationBooks = new ArrayList<>();
         //找到最近邻
         Map<Double, String> distances = computeNearestNeighbor(username, users);
-        //判断用户是否为因用户
+        //判断用户是否为新用户
         if(userRatings.bookList.isEmpty())
         {
-            recommendationBooks =  HotItemRecommendation.recommendHotItems(username,number);
+            recommendationBooks =  HotItemRecommendation.recommendHotItems(recommendationBooks,username,number);
         }else
         {
             for (String value : distances.values()) {
@@ -109,7 +109,7 @@ public class Recommend {
             }
             if(recommendationBooks.size()<number)
             {
-                recommendationBooks.addAll( HotItemRecommendation.recommendHotItems(username,number-recommendationBooks.size()));
+                recommendationBooks.addAll( HotItemRecommendation.recommendHotItems(recommendationBooks,username,number-recommendationBooks.size()));
             }
 
         }
