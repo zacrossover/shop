@@ -10,6 +10,8 @@ import com.example.shop.dao.BookDao;
 import com.example.shop.entity.Book;
 import com.github.pagehelper.PageHelper;
 
+import io.micrometer.common.util.StringUtils;
+
 @Service
 public class BookServiceImpl implements BookService {
 	@Autowired
@@ -18,6 +20,9 @@ public class BookServiceImpl implements BookService {
 	public void fillPicture(List<Book> books) {
 		StringBuilder sb;
 		for(Book b : books) {
+			if(StringUtils.isBlank(b.getPictures())) {
+				continue;
+			}
 			sb = new StringBuilder();
 			for(String p : b.getPictures().split(",")) {
 				sb.append("/image/").append(b.getClassification()).append("/").append(p).append(",");
@@ -51,12 +56,14 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public Book getById(int id) {
 		Book b = bookDao.getById(id);
-		StringBuilder sb;
-		sb = new StringBuilder();
-		for(String p : b.getPictures().split(",")) {
-			sb.append("/image/").append(b.getClassification()).append("/").append(p).append(",");
+		if(StringUtils.isNotBlank(b.getPictures())) {
+			StringBuilder sb;
+			sb = new StringBuilder();
+			for(String p : b.getPictures().split(",")) {
+				sb.append("/image/").append(b.getClassification()).append("/").append(p).append(",");
+			}
+			b.setPictures(sb.substring(0, sb.length() - 1));
 		}
-		b.setPictures(sb.substring(0, sb.length() - 1));
 		System.out.println(b.getAvgScore());
 		return b;
 	}
